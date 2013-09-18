@@ -1,0 +1,54 @@
+%table
+  %thead
+    %tr
+      %th
+        Title
+      %th
+        Twitter
+      %th
+        Facebook
+      %th
+        Goodle+1
+      %th
+        Pocket
+      %th
+        Hatena
+
+  %tbody
+    %tr
+      - @uris.each do |uri|
+        -# title
+        %td
+          %a{ href: uri, target: '_blank' } Google
+        -# twitter
+        %td
+          %a{ href: 'http://twitter.com/share', class: 'twitter-share-button', 'data-text' => 'Google', 'data-url' => uri, 'data-count' => 'horizontal' } Tweet
+        -# facebook
+        %td
+          %iframe{ src: 'http://www.facebook.com/plugins/like.php?href='+uri+'&send=false&layout=button_count&width=100&show_faces=false&action=like&colorscheme=light', scrolling: 'no', frameborder: '0', style: 'border:none; overflow:hidden; width:100px; height:21px;', allowTransparency: 'true'}
+        -# google+1
+        %td
+          %g:plusone{ size: 'medium', href: uri }
+        -# pocket
+        %td
+          %a{ 'data-save-url' => uri, 'data-pocket-label' => 'pocket', 'data-pocket-count' => 'horizontal', class: 'pocket-btn', 'data-lang' => 'en'}
+        -# hatebu
+        - uri_parse = URI.parse(uri)
+        %td
+          %a{ href: 'http://b.hatena.ne.jp/entry/'+uri_parse.host + uri_parse.path, class: 'hatena-bookmark-button', 'data-hatena-bookmark-title' => 'Google', 'data-hatena-bookmark-layout' => 'standard-balloon' }
+            %img{ src: 'http://b.st-hatena.com/images/entry-button/button-only.gif', width: '20', height: '20', style: 'border: noen;'}
+
+  %tfoot
+    %tr
+      %th
+        Title
+      %th
+        Twitter
+      %th
+        Facebook
+      %th
+        Goodle+1
+      %th
+        Pocket
+      %th
+        Hatena
