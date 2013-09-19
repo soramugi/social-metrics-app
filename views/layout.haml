@@ -2,10 +2,11 @@
 %html
   %head
     %title Social Metrics App
-    %script{:src => 'http://platform.twitter.com/widgets.js'}
-    %script{:src => 'http://platform.twitter.com/widgets.js'}
-    %script{:src => 'http://apis.google.com/js/plusone.js'}
-    %script{:src => 'http://b.st-hatena.com/js/bookmark_button.js'}
+    %link(rel='stylesheet' href='//bootswatch.com/flatly/bootstrap.min.css')
+    %script{:src => '//platform.twitter.com/widgets.js'}
+    %script{:src => '//platform.twitter.com/widgets.js'}
+    %script{:src => '//apis.google.com/js/plusone.js'}
+    %script{:src => '//b.st-hatena.com/js/bookmark_button.js'}
 
   %body
     %script
@@ -14,6 +15,7 @@
     %a{ href: 'https://github.com/soramugi/social-metrics-app' }
       %img{ style: 'z-index: 9999;position: absolute; top: 0; right: 0; border: 0;', src: 'https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png', alt: 'Fork me on GitHub' }
     .container
+      %h1 Social Metrics App
       =yield
       %hr
       %footer
