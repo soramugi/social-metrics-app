@@ -1,32 +1,43 @@
 require 'sinatra'
-require 'feed_searcher'
 require 'rss'
 
 class URI::HTTP
+  def title
+    require 'net/http'
+    require 'nkf'
+    res = Net::HTTP.get_response(self)
+    match = res.body.match(/<title.*?>(.+)<\/title>/i)
+
+    if match
+      NKF.nkf('-w', match[1])
+    else
+      "not scraping title"
+    end
+  end
+
   def not_scheme
     self.host + self.request_uri
   end
 end
 
 get'/' do
-  @uri  = URI.parse(request.url)
-  @uris = [ @uri ]
+  @placeholder = 'URL or RSS address ...'
+  @uris = [ URI.parse(request.url) ]
   haml :index
 end
 
 post'/' do
+  @placeholder = ''
   @uris = []
   if params[:url].include?('http')
+    @placeholder = params[:url]
     begin
-      @uri = URI.parse(params[:url])
-      feeds = FeedSearcher.search(params[:url])
-      rss = RSS::Parser.parse(feeds.first)
+      rss = RSS::Parser.parse(params[:url])
       rss.items.each do |item|
-        @uris.push(URI.parse(item.link.href))
+        @uris.push(URI.parse(item.link))
       end
     rescue
-      @uri = URI.parse(params[:url])
-      @uris.push(@uri)
+      @uris.push(URI.parse(params[:url]))
     end
   end
   haml :index

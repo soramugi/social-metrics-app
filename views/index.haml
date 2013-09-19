@@ -5,7 +5,7 @@
         %form{ class: 'bs-example', action: '/', method: 'post' }
           .form-group
             .input-group
-              %input{ class: 'form-control', type: 'text', name: 'url', id: 'inputDefault', placeholder: @uri }
+              %input{ class: 'form-control', type: 'text', name: 'url', id: 'inputDefault', placeholder: @placeholder }
               %span.input-group-btn
                 %button{ type: 'submit', class: 'btn btn-default' } Submit
 
@@ -30,13 +30,17 @@
 
       %tbody
         - @uris.each do |uri|
+          - if uri.to_s == request.url
+            - title = "#{uri}"
+          - else
+            - title = uri.title
           %tr
             -# title
             %td
-              %a{ style: 'word-break:break-all;', href: uri, target: '_blank' } #{uri}
+              %a{ style: 'word-break:break-all;', href: uri, target: '_blank' } #{title}
             -# twitter
             %td
-              %a{ href: 'http://twitter.com/share', class: 'twitter-share-button', 'data-text' => uri, 'data-url' => uri, 'data-count' => 'horizontal' } Tweet
+              %a{ href: 'http://twitter.com/share', class: 'twitter-share-button', 'data-text' => title, 'data-url' => uri, 'data-count' => 'horizontal' } Tweet
             -# facebook
             %td
               %iframe{ src: "http://www.facebook.com/plugins/like.php?href=#{uri}&send=false&layout=button_count&width=100&show_faces=false&action=like&colorscheme=light", scrolling: 'no', frameborder: '0', style: 'border:none; overflow:hidden; width:120px; height:21px;', allowTransparency: 'true'}
@@ -45,10 +49,10 @@
               %g:plusone{ size: 'medium', href: uri }
             -# pocket
             %td
-              %a{ 'data-save-url' => uri, 'data-pocket-label' => 'pocket', 'data-pocket-count' => 'horizontal', class: 'pocket-btn', 'data-lang' => 'en'}
+              %a{ 'data-save-url' => uri, 'data-pocket-label' => 'pocket', 'data-pocket-count' => 'horizontal', class: 'pocket-btn', 'data-lang' => 'jp'}
             -# hatebu
             %td
-              %a{ href: "http://b.hatena.ne.jp/entry/#{uri.not_scheme}", class: 'hatena-bookmark-button', 'data-hatena-bookmark-title' => uri, 'data-hatena-bookmark-layout' => 'standard-balloon' }
+              %a{ href: "http://b.hatena.ne.jp/entry/#{uri.not_scheme}", class: 'hatena-bookmark-button', 'data-hatena-bookmark-title' => title, 'data-hatena-bookmark-layout' => 'standard-balloon' }
                 %img{ src: 'http://b.st-hatena.com/images/entry-button/button-only.gif', width: '20', height: '20', style: 'border: noen;'}
 
       %tfoot
