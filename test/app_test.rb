@@ -20,4 +20,9 @@ class AppTest < Test::Unit::TestCase
     post '/', url: ''
     assert last_response.ok?
   end
+
+  def test_it_says_post_parse
+    post '/parse', url: ''
+    assert last_response.ok?
+  end
 end

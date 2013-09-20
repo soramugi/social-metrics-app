@@ -19,9 +19,8 @@
         = haml :tablelist
 
 :javascript
-  //google.load("feeds", "1");
   $(function() {
-    function addLink(link) {
+    var addLink = function(link) {
       $.post(
         '/',
         { url : link },
@@ -34,20 +33,14 @@
     addLink(location.href);
 
     $('.btn').click(function() {
-      addLink($('#inputDefault').val());
-
-      //google.setOnLoadCallback(function () {
-      //  var feed = new google.feeds.Feed($('#inputDefault').val());
-      //  feed.load(function (result){
-      //    if (!result.error) {
-      //      for (var i = 0; i < result.feed.entries.length; i++) {
-      //        addLink(result.feed.entries[i].link);
-      //      }
-      //    } else {
-      //      addLink($('#inputDefault').val());
-      //    }
-      //  });
-      //});
-
+      $.post(
+        '/parse',
+        { url : $('#inputDefault').val() },
+        function(urls) {
+          for(var i in urls) {
+            addLink(urls[i]);
+          }
+        }
+      );
     });
   });

@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 require 'rss'
 
 class URI::HTTP
@@ -21,8 +22,7 @@ class URI::HTTP
 end
 
 get'/' do
-  #@placeholder = 'URL or RSS address ...'
-  @placeholder = request.url
+  @placeholder = 'URL or RSS address ...'
   haml :index
 end
 
@@ -30,4 +30,19 @@ post'/' do
   return '' unless params[:url].include?('http')
   @uri = URI.parse(params[:url])
   haml :socialcount, layout: false
+end
+
+post '/parse' do
+  urls = []
+  begin
+    rss = RSS::Parser.parse(params[:url])
+    rss.items.each do |item|
+      urls << item.link
+    end
+  rescue
+    urls << params[:url]
+  end
+
+  content_type :json, :charset => 'utf-8'
+  urls.to_json
 end
