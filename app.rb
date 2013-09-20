@@ -11,7 +11,7 @@ class URI::HTTP
     if match
       NKF.nkf('-w', match[1])
     else
-      "not scraping title"
+      "Not Scraping Title"
     end
   end
 
@@ -22,23 +22,11 @@ end
 
 get'/' do
   @placeholder = 'URL or RSS address ...'
-  @uris = [ URI.parse(request.url) ]
   haml :index
 end
 
 post'/' do
-  @placeholder = ''
-  @uris = []
-  if params[:url].include?('http')
-    @placeholder = params[:url]
-    begin
-      rss = RSS::Parser.parse(params[:url])
-      rss.items.each do |item|
-        @uris.push(URI.parse(item.link))
-      end
-    rescue
-      @uris.push(URI.parse(params[:url]))
-    end
-  end
-  haml :index
+  return '' unless params[:url].include?('http')
+  @uri = URI.parse(params[:url])
+  haml :socialcount, layout: false
 end

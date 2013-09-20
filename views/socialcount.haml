@@ -1,0 +1,20 @@
+%tr
+  -# title
+  %td
+    %a{ style: 'word-break:break-all;', href: @uri, target: '_blank' } #{@uri.title}
+  -# twitter
+  %td
+    = haml :'social/twitter', :locals => { uri: @uri }
+  -# facebook
+  %td
+    %iframe{ src: "http://www.facebook.com/plugins/like.php?href=#{@uri}&send=false&layout=button_count&width=100&show_faces=false&action=like&colorscheme=light", scrolling: 'no', frameborder: '0', style: 'border:none; overflow:hidden; width:120px; height:21px;', allowTransparency: 'true'}
+  -# google+1
+  %td
+    = haml :'social/google+', :locals => { uri: @uri }
+  -# pocket
+  %td
+    = haml :'social/pocket', :locals => { uri: @uri }
+  -# hatebu
+  %td
+    %a.hatena-bookmark-button{ href: "http://b.hatena.ne.jp/entry/#{@uri.not_scheme}", 'data-hatena-bookmark-title' => @uri.title, 'data-hatena-bookmark-layout' => 'standard-balloon' }
+      %img{ src: 'http://b.st-hatena.com/images/entry-button/button-only.gif', width: '20', height: '20', style: 'border: noen;'}

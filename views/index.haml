@@ -1,47 +1,31 @@
 .row
-  .col-lg-6
+  .col-lg-12
     .well
       %fieldset
-        %form.bs-example{ action: '/', method: 'post' }
-          .form-group
-            .input-group
-              %input#inputDefault.form-control{ type: 'text', name: 'url', placeholder: @placeholder }
-              %span.input-group-btn
-                %button.btn.btn-default{ type: 'submit' } Submit
-
+        .input-group
+          %input#inputDefault.form-control{ type: 'text', name: 'url', placeholder: @placeholder }
+          %span.input-group-btn
+            %input.btn.btn-default{ type: 'button', value: 'Submit' }
 
 .row
-  .col-lg-6
+  .col-lg-12
     %table.table.table-striped.table-bordered.table-hover
       %thead
         = haml :tablelist
 
-      %tbody
-        - @uris.each do |uri|
-          - if uri.to_s == request.url
-            - title = "#{uri}"
-          - else
-            - title = uri.title
-          %tr
-            -# title
-            %td
-              %a{ style: 'word-break:break-all;', href: uri, target: '_blank' } #{title}
-            -# twitter
-            %td
-              %a.twitter-share-button{ href: 'http://twitter.com/share', 'data-text' => title, 'data-url' => uri, 'data-count' => 'horizontal' } Tweet
-            -# facebook
-            %td
-              %iframe{ src: "http://www.facebook.com/plugins/like.php?href=#{uri}&send=false&layout=button_count&width=100&show_faces=false&action=like&colorscheme=light", scrolling: 'no', frameborder: '0', style: 'border:none; overflow:hidden; width:120px; height:21px;', allowTransparency: 'true'}
-            -# google+1
-            %td
-              %g:plusone{ size: 'medium', href: uri }
-            -# pocket
-            %td
-              %a.pocket-btn{ 'data-save-url' => uri, 'data-pocket-label' => 'pocket', 'data-pocket-count' => 'horizontal', 'data-lang' => 'jp'}
-            -# hatebu
-            %td
-              %a.hatena-bookmark-button{ href: "http://b.hatena.ne.jp/entry/#{uri.not_scheme}", 'data-hatena-bookmark-title' => title, 'data-hatena-bookmark-layout' => 'standard-balloon' }
-                %img{ src: 'http://b.st-hatena.com/images/entry-button/button-only.gif', width: '20', height: '20', style: 'border: noen;'}
+      %tbody#sociallist
 
       %tfoot
         = haml :tablelist
+
+:javascript
+  $(function() {
+    $('.btn').click(function() {
+      $.post(
+        '/',
+        { url : $('#inputDefault').val() },
+      function(data) {
+        $('#sociallist').append(data);
+      })
+    });
+  });

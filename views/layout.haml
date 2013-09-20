@@ -3,16 +3,13 @@
   %head
     %title Social Metrics App
     %link{ rel: 'stylesheet', href: '//bootswatch.com/flatly/bootstrap.min.css' }
-    %script{src: '//platform.twitter.com/widgets.js'}
-    %script{src: '//apis.google.com/js/plusone.js'}
     %script{src: '//b.st-hatena.com/js/bookmark_button.js'}
+    %script{src: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'}
 
   %body
-    %script
-      !function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");
-
     %a{ href: 'https://github.com/soramugi/social-metrics-app' }
       %img{ style: 'z-index: 9999;position: absolute; top: 0; right: 0; border: 0;', src: 'https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png', alt: 'Fork me on GitHub' }
+
     .container
       %h1 Social Metrics App
       =yield
