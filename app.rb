@@ -21,7 +21,8 @@ class URI::HTTP
 end
 
 get'/' do
-  @placeholder = 'URL or RSS address ...'
+  #@placeholder = 'URL or RSS address ...'
+  @placeholder = request.url
   haml :index
 end
 

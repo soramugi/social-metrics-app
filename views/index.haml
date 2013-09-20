@@ -19,13 +19,35 @@
         = haml :tablelist
 
 :javascript
+  //google.load("feeds", "1");
   $(function() {
-    $('.btn').click(function() {
+    function addLink(link) {
       $.post(
         '/',
-        { url : $('#inputDefault').val() },
-      function(data) {
-        $('#sociallist').append(data);
-      })
+        { url : link },
+        function(data) {
+          $('#sociallist').prepend(data);
+        }
+      );
+    }
+
+    addLink(location.href);
+
+    $('.btn').click(function() {
+      addLink($('#inputDefault').val());
+
+      //google.setOnLoadCallback(function () {
+      //  var feed = new google.feeds.Feed($('#inputDefault').val());
+      //  feed.load(function (result){
+      //    if (!result.error) {
+      //      for (var i = 0; i < result.feed.entries.length; i++) {
+      //        addLink(result.feed.entries[i].link);
+      //      }
+      //    } else {
+      //      addLink($('#inputDefault').val());
+      //    }
+      //  });
+      //});
+
     });
   });
