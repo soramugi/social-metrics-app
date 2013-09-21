@@ -1,7 +1,12 @@
 language: ruby
-
 ruby:
-  - 1.9.2
-  - 2.0.0
-
+- 1.9.2
+- 2.0.0
 script: bundle exec rake test
+deploy:
+  provider: heroku
+  api_key:
+    secure: RhNZklYHIlHLvolw/bXCwniIwZJrEWBodym8FDTYBGaWrMz3YDLdgmMSyp6XetlHZ7BkXszzvA/E5i+WuvRdOG2mpACZ1jhNxPFspNp7J2teum9YiT64+aStvawAo+TSlqVqCQMxphgdht4rxUG9ImJbV/m/nKp3Dg7GZtsS1rk=
+  app: social-metrics-app
+  on:
+    repo: soramugi/social-metrics-app
