@@ -14,6 +14,14 @@
         = haml :tablelist
 
       %tbody#sociallist
+        %tr#loading
+          %td
+            %img{ src: 'img/load.gif' }
+          %td
+          %td
+          %td
+          %td
+          %td
 
       %tfoot
         = haml :tablelist
@@ -21,11 +29,14 @@
 :javascript
   $(function() {
     var addLink = function(link) {
+      $('#loading').fadeIn();
       $.post(
         '/',
         { url : link },
         function(data) {
-          $('#sociallist').prepend(data);
+          $('#loading').fadeOut(function() {
+            $('#sociallist').prepend(data);
+          });
         }
       );
     }
