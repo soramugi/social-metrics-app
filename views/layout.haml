@@ -1,7 +1,10 @@
 !!!
 %html
   %head
+    %meta{ charset: 'utf-8' }
     %title Social Metrics App
+    %meta{ description: 'webページのソーシャルメディア影響数表示アプリケーション' }
+    %meta{ keywords: 'ソーシャルメディア,social,media,影響数,人数,pocket,はてなブックマーク,twitter,facebook,google+1' }
     %link{ rel: 'stylesheet', href: '//bootswatch.com/flatly/bootstrap.min.css' }
     %script{src: '//b.st-hatena.com/js/bookmark_button.js'}
     %script{src: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'}
@@ -12,6 +15,7 @@
 
     .container
       %h1 Social Metrics App
+      %h5 webページのソーシャルメディア影響数を表示します
       =yield
       %hr
       %footer
