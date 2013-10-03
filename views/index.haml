@@ -21,11 +21,14 @@
 :javascript
   $(function() {
     var addLink = function(link) {
+      $('#sociallist').prepend('<tr id="loading"><td><img src="img/load.gif"></td><td></td><td></td><td></td><td></td><td></td></tr>');
       $.post(
         '/',
         { url : link },
         function(data) {
-          $('#sociallist').prepend(data);
+          $('#loading').fadeOut(function() {
+            $('#sociallist').prepend(data);
+          });
         }
       );
     }
