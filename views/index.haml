@@ -14,14 +14,6 @@
         = haml :tablelist
 
       %tbody#sociallist
-        %tr#loading
-          %td
-            %img{ src: 'img/load.gif' }
-          %td
-          %td
-          %td
-          %td
-          %td
 
       %tfoot
         = haml :tablelist
@@ -29,7 +21,7 @@
 :javascript
   $(function() {
     var addLink = function(link) {
-      $('#loading').fadeIn();
+      $('#sociallist').prepend('<tr id="loading"><td><img src="img/load.gif"></td><td></td><td></td><td></td><td></td><td></td></tr>');
       $.post(
         '/',
         { url : link },
